@@ -10,13 +10,13 @@ interface Object {
 
 module jsonpatch {
 
-  /* We use a Javascript hash to store each 
+  /* We use a Javascript hash to store each
      function. Each hash entry (property) uses
      the operation identifiers specified in rfc6902.
-     In this way, we can map each patch operation 
+     In this way, we can map each patch operation
      to its dedicated function in efficient way.
      */
-     
+
   /* The operations applicable to an object */
   var objOps = {
     add: function (obj, key) {
@@ -426,7 +426,7 @@ module jsonpatch {
 
     for (var t = 0; t < newKeys.length; t++) {
       var key = newKeys[t];
-      if (!mirror.hasOwnProperty(key)) {
+      if (!mirror.hasOwnProperty(key) && obj[key]) {
         patches.push({op: "add", path: path + "/" + escapePathComponent(key), value: obj[key]});
         mirror[key] = JSON.parse(JSON.stringify(obj[key]));
       }

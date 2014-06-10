@@ -402,7 +402,7 @@ var jsonpatch;
 
         for (var t = 0; t < newKeys.length; t++) {
             var key = newKeys[t];
-            if (!mirror.hasOwnProperty(key)) {
+            if (!mirror.hasOwnProperty(key) && obj[key]) {
                 patches.push({ op: "add", path: path + "/" + escapePathComponent(key), value: obj[key] });
                 mirror[key] = JSON.parse(JSON.stringify(obj[key]));
             }
@@ -470,4 +470,3 @@ if (typeof exports !== "undefined") {
     exports.unobserve = jsonpatch.unobserve;
     exports.generate = jsonpatch.generate;
 }
-//# sourceMappingURL=json-patch-duplex.js.map
